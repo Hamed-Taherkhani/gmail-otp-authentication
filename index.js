@@ -3,12 +3,21 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const express = require("express");
 const mongoose = require("mongoose");
+const authRoute = require("./src/routes/authRoute");
 
 const app = express();
 
 // Setup middlewares :
 app.use(helmet());
 app.use(morgan("dev"));
+app.use(express.json());
+
+// Add routers :
+app.use("/user/login", authRoute);
+
+app.get("/", (req, res) => {
+  res.status().redirect();
+});
 
 // Try to connect mongodb
 mongoose
