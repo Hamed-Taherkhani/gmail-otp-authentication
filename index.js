@@ -16,10 +16,6 @@ app.use(express.json());
 // Add routers :
 app.use("/user/login", limiter, authRoute);
 
-app.get("/", (req, res) => {
-  res.status().redirect();
-});
-
 // Try to connect mongodb
 mongoose
   .connect(process.env.URI)
