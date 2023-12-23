@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const express = require("express");
 const mongoose = require("mongoose");
 const authRoute = require("./src/routes/authRoute");
+const { limiter } = require("./src/lib/express-rate-limit");
 
 const app = express();
 
@@ -13,7 +14,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 // Add routers :
-app.use("/user/login", authRoute);
+app.use("/user/login", limiter, authRoute);
 
 app.get("/", (req, res) => {
   res.status().redirect();
